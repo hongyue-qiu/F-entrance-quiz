@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 import './App.scss';
 import Group from './Group';
+import AddMember from './AddMember';
+
 
 class App extends Component {
     state = {
         students:[],
         groups:[],
-        type:"button",
-        value:"+ 添加学员",
     }
     // async componentDidMount() {
     //     const response = await fetch('http://localhost:8080/students');
@@ -44,7 +44,7 @@ class App extends Component {
                             return <p key={`student${student.id}`}>{`${student.id}. ${student.name}`}</p>
                         })
                     }
-                    <input type={this.state.type} className="add-student" onClick={this.handleAddStudent} value={this.state.value} />
+                    <AddMember />
                 </div>
               </div>
               <div className="session">
@@ -58,7 +58,7 @@ class App extends Component {
                               return <p key={`student${student.id}`}>{`${student.id}. ${student.name}`}</p>
                           })
                       }
-                      <button className="add-student" onClick={this.handleAddStudent}>+ 添加学员</button>
+                      <AddMember value="+ 添加教师"/>
                   </div>
               </div>
           </div>
