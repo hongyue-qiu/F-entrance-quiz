@@ -13,7 +13,7 @@ class AddMember extends Component{
         students:[],
         groups:[],
         type:"button",
-        value:"+ 添加学员",
+        value:"+ 添加成员",
     }
     handleAddStudent=(e)=>{
         console.log(e);

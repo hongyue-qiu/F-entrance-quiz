@@ -58,7 +58,7 @@ class App extends Component {
                               return <p key={`student${student.id}`}>{`${student.id}. ${student.name}`}</p>
                           })
                       }
-                      <AddMember value="+ 添加教师"/>
+                      <AddMember />
                   </div>
               </div>
           </div>
