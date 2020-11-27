@@ -6,6 +6,8 @@ class App extends Component {
     state = {
         students:[],
         groups:[],
+        type:"button",
+        value:"+ 添加学员",
     }
     // async componentDidMount() {
     //     const response = await fetch('http://localhost:8080/students');
@@ -14,8 +16,12 @@ class App extends Component {
     //         students: data,
     //     })
     // }
-    handleAddStudent(){
-
+    handleAddStudent=(e)=>{
+        console.log(e);
+        this.setState({
+            type : "text",
+            value:"",
+        })
     }
 
     render() {
@@ -38,8 +44,22 @@ class App extends Component {
                             return <p key={`student${student.id}`}>{`${student.id}. ${student.name}`}</p>
                         })
                     }
-                    <button className="add-student" onClick={this.handleAddStudent}>+ 添加学员</button>
+                    <input type={this.state.type} className="add-student" onClick={this.handleAddStudent} value={this.state.value} />
                 </div>
+              </div>
+              <div className="session">
+                  <div className="students">
+                      <h2>教师列表</h2>
+                      <p>
+                          1.成吉思汗
+                      </p>
+                      {
+                          this.state.students.map((student) => {
+                              return <p key={`student${student.id}`}>{`${student.id}. ${student.name}`}</p>
+                          })
+                      }
+                      <button className="add-student" onClick={this.handleAddStudent}>+ 添加学员</button>
+                  </div>
               </div>
           </div>
         );
