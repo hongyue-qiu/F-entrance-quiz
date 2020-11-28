@@ -2,20 +2,24 @@ import React, { Component } from 'react';
 import './App.scss';
 
 class AddMember extends Component {
-  // constructor(props) {
-  //     console.log(props);
-  //     super(props);
-  //     this.state = {
-  //         value: '',
-  //     };
-  // }
+  constructor(props) {
+    console.log(props);
+    super(props);
+    this.state = {
+      type: 'button',
+      value: '+ 添加成员',
+    };
+
+    this.handleAddStudent = this.handleAddStudent.bind(this);
+    this.handleKeyDown = this.handleKeyDown.bind(this);
+  }
   // eslint-disable-next-line react/state-in-constructor
-  state = {
-    // students:[],
-    // groups:[],
-    type: 'button',
-    value: '+ 添加成员',
-  };
+  // state = {
+  //   // students:[],
+  //   // groups:[],
+  //   type: 'button',
+  //   value: '+ 添加成员',
+  // };
 
   handleAddStudent = () => {
     this.setState({

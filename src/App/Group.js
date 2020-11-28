@@ -11,8 +11,18 @@ class Group extends Component {
     show: false,
   };
 
+  constructor(props) {
+    super(props);
+    this.state = {
+      show: false,
+    };
+
+    // 这个绑定是必要的，使`this`在回调中起作用
+    this.handleGroup = this.handleGroup.bind(this);
+  }
+
   // eslint-disable-next-line no-unused-vars
-  handleAddStudent = (e) => {
+  handleGroup = (e) => {
     this.setState({
       show: true,
     });
@@ -23,12 +33,7 @@ class Group extends Component {
       <div className="session">
         <nav className="nav">
           <h2>分组列表</h2>
-          <input
-            type="button"
-            className="group-stu"
-            onClick={this.handleAddStudent}
-            value="分组学员"
-          />
+          <input type="button" className="group-stu" onClick={this.handleGroup} value="分组学员" />
         </nav>
         {this.state.show && (
           <div className="students students-group">
