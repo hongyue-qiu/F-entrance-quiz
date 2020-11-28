@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import './App.scss';
-import AddMember from './AddMember';
 
 class Trainees extends Component {
   constructor(props) {
@@ -82,7 +81,6 @@ class Trainees extends Component {
           {this.state.trainees.map((trainees) => {
             return <p key={`student${trainees.id}`}>{`${trainees.id}. ${trainees.name}`}</p>;
           })}
-          <AddMember />
           <input
             type={this.state.type}
             className="add-student"

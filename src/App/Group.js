@@ -2,15 +2,6 @@ import React, { Component } from 'react';
 import './App.scss';
 
 class Group extends Component {
-  // eslint-disable-next-line react/state-in-constructor
-  // state = {
-  //   // eslint-disable-next-line react/no-unused-state
-  //   students: [],
-  //   // eslint-disable-next-line react/no-unused-state
-  //   groups: [],
-  //   show: false,
-  // };
-
   constructor(props) {
     super(props);
     this.state = {
@@ -26,12 +17,8 @@ class Group extends Component {
     fetch('http://localhost:3000/groups', {
       method: 'GET',
       mode: 'cors',
-      // eslint-disable-next-line consistent-return
     })
       .then((response) => {
-        if (response.status === 200) {
-          return response.json();
-        }
         return response.json();
       })
       .then((data) => {
