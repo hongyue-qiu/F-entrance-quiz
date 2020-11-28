@@ -53,7 +53,7 @@ class Group extends Component {
                       return (
                         <p
                           key={`student${trainer.id}`}
-                          className="student-item member"
+                          className="student-item member-group"
                         >{`${trainer.id}. ${trainer.name}`}</p>
                       );
                     })}
@@ -64,7 +64,7 @@ class Group extends Component {
                       return (
                         <p
                           key={`student${trainees.id}`}
-                          className="student-item member"
+                          className="student-item member-group"
                         >{`${trainees.id}. ${trainees.name}`}</p>
                       );
                     })}
