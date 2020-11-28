@@ -11,6 +11,7 @@ class Trainees extends Component {
     };
 
     this.handleAddStudent = this.handleAddStudent.bind(this);
+    this.handleDeleteStudent = this.handleDeleteStudent.bind(this);
     this.handleKeyDown = this.handleKeyDown.bind(this);
   }
 
@@ -41,6 +42,22 @@ class Trainees extends Component {
       type: 'text',
       value: '',
     });
+  };
+
+  handleDeleteStudent = (event) => {
+    console.log(event.target.id);
+    fetch('http://localhost:3000/trainees/{event.target.id}', {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded',
+      },
+    })
+      .then((response) => {
+        return response.json();
+      })
+      .then(() => {
+        this.getTrainee();
+      });
   };
 
   handleKeyDown = (event) => {
@@ -83,7 +100,14 @@ class Trainees extends Component {
               return (
                 <div className="member" key={`student${trainees.id}`}>
                   <p key={`student${trainees.id}`}>{`${trainees.id}. ${trainees.name}`}</p>
-                  <input className="member-delete" type="button" value="×" />️
+                  <input
+                    className="member-delete"
+                    type="button"
+                    value="×"
+                    id={`${trainees.id}`}
+                    onClick={this.handleDeleteStudent}
+                  />
+                  ️
                 </div>
               );
             })}
