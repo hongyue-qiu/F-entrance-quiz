@@ -31,7 +31,7 @@
   width: 100%;
 }
 p {
-  width: 12.2%;
+  width: 100%;
   margin-left: 1%;
   margin-right: 1%;
   color: #393e46;
@@ -59,4 +59,26 @@ p {
   line-height: 33px;
   background-color: #eee;
   border: 1px solid #929aab;
+}
+.member-list {
+  display: flex;
+  align-items: center;
+}
+.member {
+  width: 12.2%;
+  display: flex;
+  align-items: center;
+}
+.member:hover .member-delete {
+  display: flow-root;
+}
+.member-delete {
+  width: 35px;
+  height: 35px;
+  margin-left: 11.2%;
+  position: absolute;
+  display: none;
+  background-color: #ea5455;
+  border: 0;
+  color: white;
 }
