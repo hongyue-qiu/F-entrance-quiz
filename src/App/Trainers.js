@@ -2,17 +2,17 @@ import React, { Component } from 'react';
 import './App.scss';
 import AddMember from './AddMember';
 
-class Trainees extends Component {
+class Trainers extends Component {
   constructor(props) {
     console.log(props);
     super(props);
     this.state = {
-      trainees: [],
+      trainers: [],
     };
   }
 
   componentDidMount() {
-    fetch('http://localhost:3000/trainees', {
+    fetch('http://localhost:3000/trainers', {
       method: 'GET',
       mode: 'cors',
     })
@@ -25,7 +25,7 @@ class Trainees extends Component {
       .then((data) => {
         console.log(data[0].name);
         this.setState({
-          trainees: data,
+          trainers: data,
         });
       });
   }
@@ -34,10 +34,9 @@ class Trainees extends Component {
     return (
       <div className="session">
         <div className="students">
-          <h2>学员列表</h2>
-          <p>1.成吉思汗</p>
-          {this.state.trainees.map((trainees) => {
-            return <p key={`student${trainees.id}`}>{`${trainees.id}. ${trainees.name}`}</p>;
+          <h2>讲师列表</h2>
+          {this.state.trainers.map((trainers) => {
+            return <p key={`student${trainers.id}`}>{`${trainers.id}. ${trainers.name}`}</p>;
           })}
           <AddMember />
         </div>
@@ -46,4 +45,4 @@ class Trainees extends Component {
   }
 }
 
-export default Trainees;
+export default Trainers;
