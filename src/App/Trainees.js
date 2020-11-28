@@ -45,7 +45,6 @@ class Trainees extends Component {
   };
 
   handleDeleteStudent = (event) => {
-    console.log(event.target.id);
     const { id } = event.target;
     fetch(`http://localhost:3000/trainees/${id}`, {
       method: 'DELETE',

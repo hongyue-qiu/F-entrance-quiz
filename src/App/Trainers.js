@@ -11,6 +11,7 @@ class Trainers extends Component {
     };
 
     this.handleAddStudent = this.handleAddStudent.bind(this);
+    this.handleDeleteStudent = this.handleDeleteStudent.bind(this);
     this.handleKeyDown = this.handleKeyDown.bind(this);
   }
 
@@ -38,6 +39,22 @@ class Trainers extends Component {
       type: 'text',
       value: '',
     });
+  };
+
+  handleDeleteStudent = (event) => {
+    const { id } = event.target;
+    fetch(`http://localhost:3000/trainers/${id}`, {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded',
+      },
+    })
+      .then((response) => {
+        return response.json();
+      })
+      .then(() => {
+        this.getTrainers();
+      });
   };
 
   handleKeyDown = (event) => {
@@ -81,7 +98,14 @@ class Trainers extends Component {
                 return (
                   <div className="member" key={`student${trainers.id}`}>
                     <p>{`${trainers.id}. ${trainers.name}`}</p>
-                    <input className="member-delete" type="button" value="×" />️
+                    <input
+                      className="member-delete"
+                      type="button"
+                      value="×"
+                      id={`${trainers.id}`}
+                      onClick={this.handleDeleteStudent}
+                    />
+                    ️
                   </div>
                 );
               })}
