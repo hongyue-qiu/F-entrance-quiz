@@ -1,21 +1,6 @@
 import React, { Component } from 'react';
 import './App.scss';
 
-function getTrainers() {
-  fetch('http://localhost:3000/trainers', {
-    method: 'GET',
-    mode: 'cors',
-  })
-    .then((response) => {
-      return response.json();
-    })
-    .then((data) => {
-      this.setState({
-        trainers: data,
-      });
-    });
-}
-
 class Trainers extends Component {
   constructor(props) {
     super(props);
@@ -30,7 +15,22 @@ class Trainers extends Component {
   }
 
   componentDidMount() {
-    getTrainers.call(this);
+    this.getTrainers();
+  }
+
+  getTrainers() {
+    fetch('http://localhost:3000/trainers', {
+      method: 'GET',
+      mode: 'cors',
+    })
+      .then((response) => {
+        return response.json();
+      })
+      .then((data) => {
+        this.setState({
+          trainers: data,
+        });
+      });
   }
 
   handleAddStudent = () => {
@@ -54,12 +54,12 @@ class Trainers extends Component {
           return response.json();
         })
         .then(() => {
-          getTrainers.call(this);
+          this.getTrainers();
         });
 
       this.setState({
         type: 'button',
-        value: '+ 添加成员',
+        value: '+ 添加讲师',
       });
     }
   };

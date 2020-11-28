@@ -7,10 +7,19 @@ class Trainees extends Component {
     super(props);
     this.state = {
       trainees: [],
+      type: 'button',
+      value: '+ 添加学员',
     };
+
+    this.handleAddStudent = this.handleAddStudent.bind(this);
+    this.handleKeyDown = this.handleKeyDown.bind(this);
   }
 
   componentDidMount() {
+    this.getTrainee();
+  }
+
+  getTrainee() {
     fetch('http://localhost:3000/trainees', {
       method: 'GET',
       mode: 'cors',
@@ -28,6 +37,43 @@ class Trainees extends Component {
       });
   }
 
+  handleAddStudent = () => {
+    this.setState({
+      type: 'text',
+      value: '',
+    });
+  };
+
+  handleKeyDown = (event) => {
+    if (event.key === 'Enter' && this.state.type === 'text') {
+      event.preventDefault();
+      fetch('http://localhost:3000/trainees', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        body: `name=${event.target.value}`,
+      })
+        .then((response) => {
+          return response.json();
+        })
+        .then(() => {
+          this.getTrainee();
+        });
+
+      this.setState({
+        type: 'button',
+        value: '+ 添加学员',
+      });
+    }
+  };
+
+  onChange = (event) => {
+    this.setState({
+      value: event.target.value,
+    });
+  };
+
   render() {
     return (
       <div className="session">
@@ -37,6 +83,14 @@ class Trainees extends Component {
             return <p key={`student${trainees.id}`}>{`${trainees.id}. ${trainees.name}`}</p>;
           })}
           <AddMember />
+          <input
+            type={this.state.type}
+            className="add-student"
+            onClick={this.handleAddStudent}
+            onKeyDown={this.handleKeyDown}
+            onChange={this.onChange}
+            value={this.state.value}
+          />
         </div>
       </div>
     );
