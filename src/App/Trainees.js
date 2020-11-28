@@ -78,17 +78,24 @@ class Trainees extends Component {
       <div className="session">
         <div className="students">
           <h2>学员列表</h2>
-          {this.state.trainees.map((trainees) => {
-            return <p key={`student${trainees.id}`}>{`${trainees.id}. ${trainees.name}`}</p>;
-          })}
-          <input
-            type={this.state.type}
-            className="add-student"
-            onClick={this.handleAddStudent}
-            onKeyDown={this.handleKeyDown}
-            onChange={this.onChange}
-            value={this.state.value}
-          />
+          <div className="member-list">
+            {this.state.trainees.map((trainees) => {
+              return (
+                <div className="member" key={`student${trainees.id}`}>
+                  <p key={`student${trainees.id}`}>{`${trainees.id}. ${trainees.name}`}</p>
+                  <input className="member-delete" type="button" value="×" />️
+                </div>
+              );
+            })}
+            <input
+              type={this.state.type}
+              className="add-student"
+              onClick={this.handleAddStudent}
+              onKeyDown={this.handleKeyDown}
+              onChange={this.onChange}
+              value={this.state.value}
+            />
+          </div>
         </div>
       </div>
     );
