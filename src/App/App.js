@@ -7,7 +7,6 @@ class App extends Component {
   // eslint-disable-next-line react/state-in-constructor
   state = {
     students: [],
-    groups: [],
   };
 
   // async componentDidMount() {
@@ -31,9 +30,6 @@ class App extends Component {
     return (
       <div data-testid="app" className="App">
         <Group />
-        {this.state.groups.map((student) => {
-          return <Group key={`student${student.id}`} />;
-        })}
         <div className="session">
           <div className="students">
             <h2>学员列表</h2>

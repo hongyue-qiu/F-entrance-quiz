@@ -59,7 +59,17 @@ class Group extends Component {
           this.state.groupList.map((group) => {
             return (
               <div className="students students-group" key={group.id}>
-                <div className="students-group-title">{group.name}</div>
+                <div className="students-group-title">
+                  <h3>{group.name}</h3>
+                  {group.trainers.map((trainer) => {
+                    return (
+                      <p
+                        key={`student${trainer.id}`}
+                        className="student-item"
+                      >{`${trainer.id}. ${trainer.name}`}</p>
+                    );
+                  })}
+                </div>
                 <div className="students-group-content">
                   {group.trainees.map((trainees) => {
                     return (
