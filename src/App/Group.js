@@ -3,26 +3,46 @@ import './App.scss';
 
 class Group extends Component {
   // eslint-disable-next-line react/state-in-constructor
-  state = {
-    // eslint-disable-next-line react/no-unused-state
-    students: [],
-    // eslint-disable-next-line react/no-unused-state
-    groups: [],
-    show: false,
-  };
+  // state = {
+  //   // eslint-disable-next-line react/no-unused-state
+  //   students: [],
+  //   // eslint-disable-next-line react/no-unused-state
+  //   groups: [],
+  //   show: false,
+  // };
 
   constructor(props) {
     super(props);
     this.state = {
       show: false,
+      groupList: {},
     };
 
     // 这个绑定是必要的，使`this`在回调中起作用
     this.handleGroup = this.handleGroup.bind(this);
   }
 
-  // eslint-disable-next-line no-unused-vars
-  handleGroup = (e) => {
+  componentDidMount() {
+    fetch('http://localhost:3000/groups', {
+      method: 'GET',
+      mode: 'cors',
+      // eslint-disable-next-line consistent-return
+    })
+      .then((response) => {
+        if (response.status === 200) {
+          return response.json();
+        }
+        return response.json();
+      })
+      .then((data) => {
+        console.log(data[0].name);
+        this.setState({
+          groupList: data,
+        });
+      });
+  }
+
+  handleGroup = () => {
     this.setState({
       show: true,
     });
@@ -35,15 +55,24 @@ class Group extends Component {
           <h2>分组列表</h2>
           <input type="button" className="group-stu" onClick={this.handleGroup} value="分组学员" />
         </nav>
-        {this.state.show && (
-          <div className="students students-group">
-            <div className="students-group-title">1 组</div>
-            <div className="students-group-content">
-              <p>1.成吉思汗</p>
-              <p>2.鲁班七号</p>
-            </div>
-          </div>
-        )}
+        {this.state.show &&
+          this.state.groupList.map((group) => {
+            return (
+              <div className="students students-group" key={group.id}>
+                <div className="students-group-title">{group.name}</div>
+                <div className="students-group-content">
+                  {group.trainees.map((trainees) => {
+                    return (
+                      <p
+                        key={`student${trainees.id}`}
+                        className="student-item"
+                      >{`${trainees.id}. ${trainees.name}`}</p>
+                    );
+                  })}
+                </div>
+              </div>
+            );
+          })}
       </div>
     );
   }
