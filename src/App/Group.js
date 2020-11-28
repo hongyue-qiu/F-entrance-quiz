@@ -8,7 +8,6 @@ class Group extends Component {
         show:false,
     }
     handleAddStudent=(e)=>{
-        console.log(e);
         this.setState({
             show:true,
         })

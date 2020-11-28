@@ -16,14 +16,28 @@ class AddMember extends Component{
         value:"+ 添加成员",
     }
     handleAddStudent=(e)=>{
-        console.log(e);
         this.setState({
             type : "text",
             value:"",
         })
-    }
+    };
+    handleKeyDown = (event) => {
+        if (event.key === 'Enter') {
+            console.log(event.key);
+            this.setState({
+                type:"button",
+                value:"+ 添加成员",
+            })
+        }
+    };
+    onChange = (event) => {
+        const text = event.target.value;
+        this.setState({
+            value:event.target.value,
+        });
+    };
     render() {
-        return (<input type={this.state.type} className="add-student" onClick={this.handleAddStudent} value={this.state.value} />)
+        return (<input type={this.state.type} className="add-student" onClick={this.handleAddStudent} onKeyDown={this.handleKeyDown} onChange={this.onChange} value={this.state.value} />)
     }
 }
 
