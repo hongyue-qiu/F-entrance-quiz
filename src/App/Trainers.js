@@ -1,10 +1,23 @@
 import React, { Component } from 'react';
 import './App.scss';
-import AddMember from './AddMember';
+
+function getTrainers() {
+  fetch('http://localhost:3000/trainers', {
+    method: 'GET',
+    mode: 'cors',
+  })
+    .then((response) => {
+      return response.json();
+    })
+    .then((data) => {
+      this.setState({
+        trainers: data,
+      });
+    });
+}
 
 class Trainers extends Component {
   constructor(props) {
-    console.log(props);
     super(props);
     this.state = {
       trainers: [],
@@ -12,40 +25,24 @@ class Trainers extends Component {
       value: '+ 添加讲师',
     };
 
-    // this.handleAddStudent = this.handleAddStudent.bind(this);
-    // this.handleKeyDown = this.handleKeyDown.bind(this);
+    this.handleAddStudent = this.handleAddStudent.bind(this);
+    this.handleKeyDown = this.handleKeyDown.bind(this);
   }
 
   componentDidMount() {
-    fetch('http://localhost:3000/trainers', {
-      method: 'GET',
-      mode: 'cors',
-    })
-      .then((response) => {
-        return response.json();
-      })
-      .then((data) => {
-        this.setState({
-          trainers: data,
-        });
-      });
+    getTrainers.call(this);
   }
 
-  handleAddStudent = (event) => {
-    console.log(event);
-    if (event.type === 'click') {
-      console.log(event.type);
-      this.setState({
-        type: 'text',
-        value: '',
-      });
-    }
+  handleAddStudent = () => {
+    this.setState({
+      type: 'text',
+      value: '',
+    });
   };
 
   handleKeyDown = (event) => {
-    if (event.key === 'Enter') {
+    if (event.key === 'Enter' && this.state.type === 'text') {
       event.preventDefault();
-      console.log(event.target.value);
       fetch('http://localhost:3000/trainers', {
         method: 'POST',
         headers: {
@@ -56,11 +53,10 @@ class Trainers extends Component {
         .then((response) => {
           return response.json();
         })
-        .then((data) => {
-          this.setState({
-            trainers: data,
-          });
+        .then(() => {
+          getTrainers.call(this);
         });
+
       this.setState({
         type: 'button',
         value: '+ 添加成员',
@@ -83,7 +79,6 @@ class Trainers extends Component {
             this.state.trainers.map((trainers) => {
               return <p key={`student${trainers.id}`}>{`${trainers.id}. ${trainers.name}`}</p>;
             })}
-          <AddMember />
           <input
             type={this.state.type}
             className="add-student"

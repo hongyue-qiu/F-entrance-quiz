@@ -3,7 +3,6 @@ import './App.scss';
 
 class AddMember extends Component {
   constructor(props) {
-    console.log(props);
     super(props);
     this.state = {
       type: 'button',
@@ -23,7 +22,6 @@ class AddMember extends Component {
 
   handleKeyDown = (event) => {
     if (event.key === 'Enter') {
-      console.log(event.key);
       this.setState({
         type: 'button',
         value: '+ 添加成员',

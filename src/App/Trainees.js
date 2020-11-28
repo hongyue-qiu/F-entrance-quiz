@@ -4,7 +4,6 @@ import AddMember from './AddMember';
 
 class Trainees extends Component {
   constructor(props) {
-    console.log(props);
     super(props);
     this.state = {
       trainees: [],
@@ -23,7 +22,6 @@ class Trainees extends Component {
         return response.json();
       })
       .then((data) => {
-        console.log(data[0].name);
         this.setState({
           trainees: data,
         });

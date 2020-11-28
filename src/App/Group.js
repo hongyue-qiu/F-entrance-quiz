@@ -35,7 +35,6 @@ class Group extends Component {
         return response.json();
       })
       .then((data) => {
-        console.log(data[0].name);
         this.setState({
           groupList: data,
         });
