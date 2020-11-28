@@ -56,29 +56,32 @@ class Group extends Component {
           <input type="button" className="group-stu" onClick={this.handleGroup} value="分组学员" />
         </nav>
         {this.state.show &&
+          this.state.groupList &&
           this.state.groupList.map((group) => {
             return (
               <div className="students students-group" key={group.id}>
                 <div className="students-group-title">
                   <h3>{group.name}</h3>
-                  {group.trainers.map((trainer) => {
-                    return (
-                      <p
-                        key={`student${trainer.id}`}
-                        className="student-item"
-                      >{`${trainer.id}. ${trainer.name}`}</p>
-                    );
-                  })}
+                  {group.trainers &&
+                    group.trainers.map((trainer) => {
+                      return (
+                        <p
+                          key={`student${trainer.id}`}
+                          className="student-item"
+                        >{`${trainer.id}. ${trainer.name}`}</p>
+                      );
+                    })}
                 </div>
                 <div className="students-group-content">
-                  {group.trainees.map((trainees) => {
-                    return (
-                      <p
-                        key={`student${trainees.id}`}
-                        className="student-item"
-                      >{`${trainees.id}. ${trainees.name}`}</p>
-                    );
-                  })}
+                  {group.trainees &&
+                    group.trainees.map((trainees) => {
+                      return (
+                        <p
+                          key={`student${trainees.id}`}
+                          className="student-item"
+                        >{`${trainees.id}. ${trainees.name}`}</p>
+                      );
+                    })}
                 </div>
               </div>
             );

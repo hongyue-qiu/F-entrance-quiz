@@ -35,7 +35,6 @@ class Trainees extends Component {
       <div className="session">
         <div className="students">
           <h2>学员列表</h2>
-          <p>1.成吉思汗</p>
           {this.state.trainees.map((trainees) => {
             return <p key={`student${trainees.id}`}>{`${trainees.id}. ${trainees.name}`}</p>;
           })}

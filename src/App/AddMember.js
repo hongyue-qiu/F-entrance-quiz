@@ -13,13 +13,6 @@ class AddMember extends Component {
     this.handleAddStudent = this.handleAddStudent.bind(this);
     this.handleKeyDown = this.handleKeyDown.bind(this);
   }
-  // eslint-disable-next-line react/state-in-constructor
-  // state = {
-  //   // students:[],
-  //   // groups:[],
-  //   type: 'button',
-  //   value: '+ 添加成员',
-  // };
 
   handleAddStudent = () => {
     this.setState({
