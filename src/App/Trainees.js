@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './App.scss';
 
+// TODO GTB-知识点: - 组件划分不合理，应该再抽出一层Trainee或者PersonnelItem组件
 class Trainees extends Component {
   constructor(props) {
     super(props);
@@ -20,11 +21,13 @@ class Trainees extends Component {
   }
 
   getTrainee() {
+    // TODO GTB-工程实践: - API请求建议抽取到单独的utils文件里面
     fetch('http://localhost:3000/trainees', {
       method: 'GET',
       mode: 'cors',
     })
       .then((response) => {
+        // TODO GTB-知识点: - 疑惑：这个if()存在的意义是什么？因为你最终总是会return response.json();？
         if (response.status === 200) {
           return response.json();
         }
@@ -46,6 +49,7 @@ class Trainees extends Component {
 
   handleDeleteStudent = (event) => {
     const { id } = event.target;
+    // TODO GTB-工程实践: - API请求建议抽取到单独的utils文件里面
     fetch(`http://localhost:3000/trainees/${id}`, {
       method: 'DELETE',
       headers: {
@@ -63,6 +67,7 @@ class Trainees extends Component {
   handleKeyDown = (event) => {
     if (event.key === 'Enter' && this.state.type === 'text') {
       event.preventDefault();
+      // TODO GTB-工程实践: - API请求建议抽取到单独的utils文件里面
       fetch('http://localhost:3000/trainees', {
         method: 'POST',
         headers: {
@@ -92,10 +97,12 @@ class Trainees extends Component {
 
   render() {
     return (
-      <div className="session">
+        //  TODO feedback: 页面的模块划分非常明显，需要第一层的div换为section标签更合适
+        <div className="session">
         <div className="students">
           <h2>学员列表</h2>
           <div className="member-list">
+            {/* // TODO feedback: 列表元素没有使用ul li */}
             {this.state.trainees.map((trainees) => {
               return (
                 <div className="member" key={`student${trainees.id}`}>
@@ -111,6 +118,8 @@ class Trainees extends Component {
                 </div>
               );
             })}
+            {/* // TODO GTB-工程实践: - 不建议通过改变input的type这种方式来实现，这样会使代码变得复杂，从而不利于阅读和维护 */}
+            {/* // TODO GTB-知识点: - 建议使用onKeyUp而不是onKeyDown */}
             <input
               type={this.state.type}
               className="add-student"

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './App.scss';
 
+// TODO GTB-知识点: - 组件划分不合理，应该再抽出一层Trainer或者PersonnelItem组件
 class Trainers extends Component {
   constructor(props) {
     super(props);
@@ -20,6 +21,7 @@ class Trainers extends Component {
   }
 
   getTrainers() {
+    // TODO GTB-工程实践: - API请求建议抽取到单独的utils文件里面
     fetch('http://localhost:3000/trainers', {
       method: 'GET',
       mode: 'cors',
@@ -43,6 +45,7 @@ class Trainers extends Component {
 
   handleDeleteStudent = (event) => {
     const { id } = event.target;
+    // TODO GTB-工程实践: - API请求建议抽取到单独的utils文件里面
     fetch(`http://localhost:3000/trainers/${id}`, {
       method: 'DELETE',
       headers: {
@@ -60,6 +63,7 @@ class Trainers extends Component {
   handleKeyDown = (event) => {
     if (event.key === 'Enter' && this.state.type === 'text') {
       event.preventDefault();
+      // TODO GTB-工程实践: - API请求建议抽取到单独的utils文件里面
       fetch('http://localhost:3000/trainers', {
         method: 'POST',
         headers: {
@@ -89,11 +93,13 @@ class Trainers extends Component {
 
   render() {
     return (
-      <div className="session">
+        //  TODO feedback: 页面的模块划分非常明显，需要第一层的div换为section标签更合适
+        <div className="session">
         <div className="students">
           <h2>讲师列表</h2>
           <div className="member-list">
             {this.state.trainers &&
+            // TODO feedback: 列表元素没有使用ul li
               this.state.trainers.map((trainers) => {
                 return (
                   <div className="member" key={`student${trainers.id}`}>
